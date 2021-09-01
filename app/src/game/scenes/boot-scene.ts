@@ -35,6 +35,7 @@ export class BootScene extends Phaser.Scene {
 
   public preload = (): void => {
     // Construct progress bar
+
     this.createProgressBar();
 
     // Construct gotchi game object from registry
@@ -152,6 +153,9 @@ export class BootScene extends Phaser.Scene {
       case "AUDIO":
         this.load.audio(file.key, [file.src]);
         break;
+      case "JSON":
+        this.load.tilemapTiledJSON(file.key, [file.src]);
+        break;  
       case "SPRITESHEET":
         this.load.spritesheet(
           file.key,
@@ -172,15 +176,19 @@ export class BootScene extends Phaser.Scene {
   ) => {
     const svg = gotchiObject.svg;
     const spriteMatrix = [
+      // Flapping animation
       [
-        customiseSvg(svg, { removeBg: true }),
         customiseSvg(svg, {
           armsUp: true,
-          eyes: "happy",
-          float: true,
           removeBg: true,
+          removeShadow: true
         }),
+        customiseSvg(svg, { removeBg: true, removeShadow: true }),
       ],
+      // Dead frame
+      [
+        customiseSvg(svg, { removeBg: true, removeShadow: true, eyes: 'sleeping', mouth: 'neutral' }),
+      ]
     ];
 
     const { src, dimensions } = await constructSpritesheet(spriteMatrix);
