@@ -42,12 +42,12 @@ export class Player extends  Phaser.Physics.Arcade.Sprite {
     this.scene.physics.world.enable(this);
     
 	//(this.body as Phaser.Physics.Arcade.Body).setGravityY(getGameHeight(this.scene) * 1.5);
-    (this.body as Phaser.Physics.Arcade.Body).setSize(90, 120);
+    (this.body as Phaser.Physics.Arcade.Body).setSize(70, 80);
   
 
     // sprite
     this.setOrigin(0, 0);
-    this.setDisplaySize(this.displayHeight * getGameHeight(scene) / 1200, this.displayHeight * getGameHeight(scene) / 1200);
+    this.setDisplaySize(this.displayHeight * getGameHeight(scene) / 1400, this.displayHeight * getGameHeight(scene) / 1400);
 
     // input
     this.upKey = this.scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
@@ -75,6 +75,8 @@ export class Player extends  Phaser.Physics.Arcade.Sprite {
 //		this.lastBombDrop = 0;
 //	}
 
+// set each zombie's target to be the player
+   
 
   update(): void {
     // handle input
@@ -151,8 +153,8 @@ export class Player extends  Phaser.Physics.Arcade.Sprite {
    // }
 
     // check if off the screen
-    if (this.y > getGameHeight(this.scene) || this.y < 0) {
-      this.setDead(true);
-    }
+    //if (this.y > getGameHeight(this.scene) || this.y < 0) {
+    //  this.setDead(true);
+   // }
   }
 }

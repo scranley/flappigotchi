@@ -64,8 +64,12 @@ export class BootScene extends Phaser.Scene {
           this.loadingText?.setText(`Connecting to server...`);
           this.startGame();
         }
-        if (this.loadIndex === assets.length && this.gotchi) {
+        if (key === "MAP" && this.gotchi) {
+          this.loadingText?.setText(`Loading Aavegotchi...`);
           this.loadInGotchiSpritesheet(this.gotchi);
+        }
+        if (this.loadIndex === assets.length) {
+          this.load.tilemapTiledJSON('MAP', 'assets/level1.json');
         } else {
           this.loadNextFile(this.loadIndex);
         }
@@ -153,9 +157,6 @@ export class BootScene extends Phaser.Scene {
       case "AUDIO":
         this.load.audio(file.key, [file.src]);
         break;
-      case "JSON":
-        this.load.tilemapTiledJSON(file.key, [file.src]);
-        break;  
       case "SPRITESHEET":
         this.load.spritesheet(
           file.key,
