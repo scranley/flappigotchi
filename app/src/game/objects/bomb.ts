@@ -1,6 +1,7 @@
 
 import { getGameHeight } from '../helpers';
 import { BOMB } from 'game/assets';
+import { BOMBSOUND } from 'game/assets';
 import { Explosion } from "game/objects";
 import { FIREBALL } from "game/assets";
 import { Potion } from "game/objects";
@@ -9,6 +10,7 @@ import {POTION} from 'game/assets';
 export class Bomb extends Phaser.Physics.Arcade.Sprite{
  
  private explosions?: Phaser.Physics.Arcade.Group
+  private bombsound!: Phaser.Sound.BaseSound;
 
  private potions?: Phaser.Physics.Arcade.Group
 
@@ -18,6 +20,8 @@ export class Bomb extends Phaser.Physics.Arcade.Sprite{
    
    this.displayHeight = getGameHeight(scene) / 14;
    this.displayWidth = getGameHeight(scene) / 14;
+
+    this.bombsound = scene.sound.add(BOMBSOUND, { loop: false });
   
    this.anims.create({
       key: 'bomb',
@@ -40,6 +44,7 @@ this.on('animationcomplete', this.explode, this);
     //{
     //  return
     //}
+        this.bombsound?.play();
     
     const myexplosion = this.explosions.get(this.x, this.y, 'fireball') as Phaser.Physics.Arcade.Image
     //const mypotion = this.potions.get(this.x, this.y, 'potion') as Phaser.Physics.Arcade.Image

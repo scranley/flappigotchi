@@ -31,6 +31,9 @@ export const FULLHEART = 'ui-heart-full';
 export const EMPTYHEART = 'ui-heart-empty';
 export const ENEMY = 'enemy';
 export const BOMB = 'bomb';
+export const BOMBSOUND = 'bombsound';
+export const OPENCHEST = 'openchest';
+
 export const TREASURE = 'treasure';
 export const CHEST = 'chest';
 export const SWORD = 'sword';
@@ -41,6 +44,7 @@ export const FIREBALL = 'fireball';
 export const TOWER = 'tower'; 
 export const DUNGEONTILESET = 'dungeontileset';
 export const LIQUIDATOR1 = 'LIQUIDATOR1';
+export const SUCCESS= 'success';
 
 // Save all in game assets in the public folder
 export const assets: Array<Asset | SpritesheetAsset> = [
@@ -166,6 +170,21 @@ export const assets: Array<Asset | SpritesheetAsset> = [
    {
     key: OOPS,
     src: 'assets/sounds/oops.mp3',
+    type: 'AUDIO',
+  },
+  {
+    key: SUCCESS,
+    src: 'assets/sounds/success.mp3',
+    type: 'AUDIO',
+  },
+    {
+    key: BOMBSOUND,
+    src: 'assets/sounds/bomb.wav',
+    type: 'AUDIO',
+  },
+  {
+    key: OPENCHEST,
+    src: 'assets/sounds/openchest.wav',
     type: 'AUDIO',
   },
 ];

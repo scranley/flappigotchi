@@ -1,4 +1,4 @@
-import { LEFT_CHEVRON, BG, CLICK, BOOP, OOPS } from "game/assets";
+import { LEFT_CHEVRON, BG, CLICK, BOOP, OOPS, SUCCESS} from "game/assets";
 import { AavegotchiGameObject } from "types";
 import { getGameWidth, getGameHeight, getRelative } from "../helpers";
 import { Player, Bomb, Enemy, ScoreZone, Missle, Chest, Potion, Slime, Explosion,Knife, Tower, Fireball } from "game/objects";
@@ -47,8 +47,10 @@ export class GameScene extends Phaser.Scene {
   // Sounds
   private back?: Phaser.Sound.BaseSound;
   private boop?: Phaser.Sound.BaseSound;
-   private oops?: Phaser.Sound.BaseSound;
-
+   private oops!: Phaser.Sound.BaseSound;
+  private click!: Phaser.Sound.BaseSound;
+    private success!: Phaser.Sound.BaseSound;
+    
 
   // Score
   private score = 0;
@@ -96,8 +98,11 @@ export class GameScene extends Phaser.Scene {
     this.add
       .image(getGameWidth(this) / 2, getGameHeight(this) / 2, BG)
       .setDisplaySize(getGameWidth(this), getGameHeight(this));
-    this.back = this.sound.add(CLICK, { loop: false });
+    this.click = this.sound.add(CLICK, { loop: false });
     this.boop = this.sound.add(BOOP, { loop: false });
+     this.oops = this.sound.add(OOPS, { loop: false });
+      this.success = this.sound.add(SUCCESS, { loop: false });
+      
  
    
     this.totalTowers = 0;  
@@ -661,6 +666,8 @@ private handlePlayerChestCollision(obj1: Phaser.GameObjects.GameObject, obj2: Ph
 
     enemy.handleDamage(dir)
 
+     this.click?.play();
+
     if (enemy.getDead())  
     {
     this.enemies.killAndHide(obj2)
@@ -687,6 +694,8 @@ private handlePlayerChestCollision(obj1: Phaser.GameObjects.GameObject, obj2: Ph
     const dir = new Phaser.Math.Vector2(dx, dy).normalize().scale(200)
 
     slime.handleDamage(dir)
+
+        this.click?.play();
 
     if (slime.getDead())
     {
@@ -719,6 +728,7 @@ private handlePlayerChestCollision(obj1: Phaser.GameObjects.GameObject, obj2: Ph
 
     if(this.totalTowers <= 0) {
         sceneEvents.emit('you-win')
+       this.success?.play();
     }
 
     obj2.destroy()
@@ -759,7 +769,7 @@ private handlePlayerEnemyCollision(obj1: Phaser.GameObjects.GameObject, obj2: Ph
 
     sceneEvents.emit('player-health-changed', this.player.health)
 
-     this.oops?.play();
+     this.oops.play();
 
     if (this.player.health <= 0)
     {
@@ -782,7 +792,7 @@ private handlePlayerEnemyCollision(obj1: Phaser.GameObjects.GameObject, obj2: Ph
 
     this.player.handleDamage(dir)
 
-      this.oops?.play();
+      this.oops.play();
 
     sceneEvents.emit('player-health-changed', this.player.health)
 
@@ -809,7 +819,7 @@ private handlePlayerEnemyCollision(obj1: Phaser.GameObjects.GameObject, obj2: Ph
 
     this.player.handleDamage(dir)
 
-      this.oops?.play();
+      this.oops.play();
 
     sceneEvents.emit('player-health-changed', this.player.health)
 
@@ -835,7 +845,7 @@ private handlePlayerEnemyCollision(obj1: Phaser.GameObjects.GameObject, obj2: Ph
 
     this.player.handleDamage(dir)
 
-      this.oops?.play();
+      this.oops.play();
 
     sceneEvents.emit('player-health-changed', this.player.health)
 

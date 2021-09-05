@@ -1,15 +1,21 @@
 
 import { BOMB } from 'game/assets';
 import { getGameHeight } from '../helpers';
+import { OPENCHEST } from 'game/assets';
 
 export class Chest extends Phaser.Physics.Arcade.Sprite
 {
+private openchest!: Phaser.Sound.BaseSound;
 	constructor(scene: Phaser.Scene, x: number, y: number, texture: string, frame?: string | number)
 	{
 
 		super(scene, x, y, BOMB, 0)
 
 		// sprite
+
+
+    this.openchest = scene.sound.add(OPENCHEST, { volume: .1,loop: false });
+
     this.setDisplaySize(this.displayHeight * getGameHeight(scene) / 700, this.displayHeight * getGameHeight(scene) / 700);
 
      this.anims.create({
@@ -37,6 +43,7 @@ open()
 		{
 			return 0
 		} 
+this.openchest?.play();	
 
            if (!this.anims.isPlaying)
 		{this.play('chest-open')
