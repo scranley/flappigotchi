@@ -1,28 +1,63 @@
-import { Explosion } from '../objects/explosion';
+
 import { getGameHeight } from '../helpers';
 import { BOMB } from 'game/assets';
+import { Explosion } from "game/objects";
+import { FIREBALL } from "game/assets";
+import { Potion } from "game/objects";
+import {POTION} from 'game/assets';
 
 export class Bomb extends Phaser.Physics.Arcade.Sprite{
+ 
+ private explosions?: Phaser.Physics.Arcade.Group
+
+ private potions?: Phaser.Physics.Arcade.Group
+
  constructor(scene: Phaser.Scene) {
    super(scene, -100, -100, BOMB, 0);
-   this.setOrigin(0, 0);
-   this.displayHeight = getGameHeight(scene) / 7;
-   this.displayWidth = getGameHeight(scene) / 7;
+
+   
+   this.displayHeight = getGameHeight(scene) / 14;
+   this.displayWidth = getGameHeight(scene) / 14;
   
    this.anims.create({
       key: 'bomb',
       frames: this.anims.generateFrameNumbers('bomb' || '', { frames: [ 0,1,2,3,4,5,6,7 ]}),
       frameRate: 2,
     });
+
 this.on('animationcomplete', this.explode, this);
 
  }
 
  explode() {
-		// console.log('bomb.explode()\t bomb=%o', this);
-		const explosion = new Explosion(this.scene, this.x, this.y);
-		this.destroy();
+
+     if (!this.explosions)
+    {
+      return
+    }
+
+    // if (!this.potions)
+    //{
+    //  return
+    //}
+    
+    const myexplosion = this.explosions.get(this.x, this.y, 'fireball') as Phaser.Physics.Arcade.Image
+    //const mypotion = this.potions.get(this.x, this.y, 'potion') as Phaser.Physics.Arcade.Image
+   
+    this.destroy();
+
 	}
+
+    setExplosions(explosions: Phaser.Physics.Arcade.Group)
+  {
+    this.explosions = explosions
+  }
+
+     setPotions(potions: Phaser.Physics.Arcade.Group)
+  {
+    this.potions = potions
+  }
+
 
 public activate = (x: number, y: number) => {
     // Physics
@@ -41,36 +76,3 @@ public activate = (x: number, y: number) => {
   }
 }
 
-
-
-/* export class Bomb extends Phaser.Physics.Arcade.Sprite {
-	constructor(params) {
-		super(params.scene, params.x, params.y, 'bomb');
-
-		// console.log('bomb: %o', this);
-		params.scene.add.existing(this);
-		params.scene.physics.world.enable(this);
-		params.scene.bombs.add(this);
-
-		this.setOrigin(0.5);
-
-		this.x = this.snapToGrid(this.x);
-		this.y = this.snapToGrid(this.y);
-
-		this.anims.play('bomb', true);
-		this.on('animationcomplete', this.explode, this);
-	}
-
-	explode() {
-		// console.log('bomb.explode()\t bomb=%o', this);
-		const explosion = new Explosion({scene:this.scene, x:this.x, y:this.y, frame:2});
-		this.destroy();
-	}
-
-	snapToGrid(n,snapSize=32) {
-		n -= 16;
-		n /= snapSize;
-		n = Math.round(n);
-		return n*snapSize + 16;
-	}
-} */

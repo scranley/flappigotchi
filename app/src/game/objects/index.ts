@@ -1,7 +1,12 @@
 export * from './enemy';
 export * from './bomb';
-export * from './explosion';
+export * from './slime';
 export * from './missle';
-
+export * from './chest';
+export * from './potion';
+export * from './knife';
 export * from './player';
+export * from './fireball';
+export * from './tower';
+export * from './explosion';
 export * from './scoreZone';

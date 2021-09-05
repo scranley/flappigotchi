@@ -18,6 +18,10 @@ export class Missle extends Phaser.Physics.Arcade.Sprite{
 		this.target = new Phaser.Math.Vector2(tx, ty)
 		this.trackMouse = false
 
+		// sprite
+    this.setOrigin(0, 0);
+    this.setDisplaySize(this.displayHeight * getGameHeight(scene) / 1400, this.displayHeight * getGameHeight(scene) / 1400);
+
    this.anims.create({
       key: 'bomb',
       frames: this.anims.generateFrameNumbers('bomb' || '', { frames: [ 0,1,2,3,4,5,6,7 ]}),
@@ -27,10 +31,14 @@ export class Missle extends Phaser.Physics.Arcade.Sprite{
 
  }
 
-  public activate = () => {
+  public activate = (x: number, y: number,velocityX: number, velocityY: number) => {
     // Physics
     this.scene.physics.world.enable(this);
-  // (this.body as Phaser.Physics.Arcade.Body).setVelocityX(10);
+
+    this.setPosition(x, y);
+
+   (this.body as Phaser.Physics.Arcade.Body).setVelocity(velocityX, velocityY);
+
     this.anims.play('bomb', true);
   }
 
@@ -40,7 +48,9 @@ export class Missle extends Phaser.Physics.Arcade.Sprite{
 		this.trackMouse = enabled
 	}
 
-	public update = () => {
+
+}
+	/* public update = () => {
     
 
 	//const target = this.trackMouse ? this.scene.input.activePointer.position : this.target
@@ -85,7 +95,7 @@ export class Missle extends Phaser.Physics.Arcade.Sprite{
 	(this.body as Phaser.Physics.Arcade.Body).setVelocityY(vy);
 
 	}
-}
+} */
 
 /* Phaser.GameObjects.GameObjectFactory.register('missile', function (x, y, texture) {
 	const missile = new Missile(this.scene, x, y, texture)

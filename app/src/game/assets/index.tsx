@@ -23,6 +23,7 @@ export const LEFT_CHEVRON = 'left_chevron';
 export const CLICK = 'click';
 export const PIPES = 'pipes';
 export const BOOP = 'boop';
+export const OOPS = 'oops';
 //export const LEVEL1 = 'level1';
 //export const LEVEL2 = 'level2';
 //export const LEVEL3 = 'level3';
@@ -31,18 +32,18 @@ export const EMPTYHEART = 'ui-heart-empty';
 export const ENEMY = 'enemy';
 export const BOMB = 'bomb';
 export const TREASURE = 'treasure';
-export const EXPLOSION = 'explosion';
-export const TILESET = 'tileset';
+export const CHEST = 'chest';
+export const SWORD = 'sword';
+export const POTION = 'potion';
+export const EXPLOSION = 'explosion'; 
+export const SLIME = 'slime'; 
+export const FIREBALL = 'fireball'; 
+export const TOWER = 'tower'; 
 export const DUNGEONTILESET = 'dungeontileset';
 export const LIQUIDATOR1 = 'LIQUIDATOR1';
 
 // Save all in game assets in the public folder
 export const assets: Array<Asset | SpritesheetAsset> = [
-  {
-    key: TILESET,
-    src: 'assets/tileset.png',
-    type: 'IMAGE',
-  },
   {
     key: DUNGEONTILESET,
     src: 'assets/dtiles.png',
@@ -84,6 +85,11 @@ export const assets: Array<Asset | SpritesheetAsset> = [
     type: 'IMAGE',
   },
   {
+    key: SWORD,  
+    src: 'assets/sword.png',
+    type: 'IMAGE',
+  },
+  {
     key: EMPTYHEART,  
     src: 'assets/empty-heart.png',
     type: 'IMAGE',
@@ -102,6 +108,33 @@ export const assets: Array<Asset | SpritesheetAsset> = [
       frameHeight: 32,
     }
   },
+   {
+    key: CHEST,   //replace with gotchi
+    src: 'assets/chest.png',
+    type: 'SPRITESHEET',
+    data: {
+      frameWidth: 46,
+      frameHeight: 50,
+    }
+  },
+  {
+    key: POTION,   //replace with gotchi
+    src: 'assets/potion.png',
+    type: 'SPRITESHEET',
+    data: {
+      frameWidth: 48,
+      frameHeight: 48,
+    }
+  },
+   {
+    key: TOWER,   //replace with gotchi
+    src: 'assets/tower.png',
+    type: 'SPRITESHEET',
+    data: {
+      frameWidth: 46,
+      frameHeight: 96,
+    }
+  },
   {
     key: EXPLOSION,   //replace with gotchi
     src: 'assets/explosion.png',
@@ -112,8 +145,27 @@ export const assets: Array<Asset | SpritesheetAsset> = [
     }
   },
   {
+    key: SLIME,   //replace with gotchi
+    src: 'assets/evileye.svg',
+    type: 'SVG'
+  },
+   {
+    key: FIREBALL,   //replace with gotchi
+    src: 'assets/fireball.png',
+    type: 'SPRITESHEET',
+    data: {
+      frameWidth: 32,
+      frameHeight: 32,
+    }
+  },
+  {
     key: BOOP,
     src: 'assets/sounds/boop.mp3',
+    type: 'AUDIO',
+  },
+   {
+    key: OOPS,
+    src: 'assets/sounds/oops.mp3',
     type: 'AUDIO',
   },
 ];
